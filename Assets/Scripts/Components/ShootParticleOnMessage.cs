@@ -23,9 +23,7 @@ public class ShootParticleOnMessage : ComponentBehaviour, IMessageable
 			var direction = (Input.mousePosition - mainCamera.WorldToScreenPoint(transform.position)).normalized;
 			direction.z = direction.y;
 			direction.y = 0f;
-
-			transform.rotation = Quaternion.LookRotation(direction);
-			particle.SendMessage(Message.Value);
+			particle.SendMessage(GameMessages.OnShot, direction.normalized, MessagePropagation.DownwardsInclusive);
 		}
 	}
 
