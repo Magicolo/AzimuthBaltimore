@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Pseudo;
 
-public class SeekTarget : ComponentBehaviour
+public class SeekMotion : ComponentBehaviour
 {
 	public Vector3 Speed = new Vector3(5f, 5f, 5f);
 	public Vector3 Offset;
