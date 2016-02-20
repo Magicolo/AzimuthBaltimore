@@ -7,13 +7,20 @@ using Pseudo;
 
 public class SeekMotion : ComponentBehaviour
 {
-	public Vector3 Speed = new Vector3(5f, 5f, 5f);
-	public Vector3 Offset;
 	[Mask(Axes.XYZ)]
 	public Axes Axes = Axes.XYZ;
+	public Vector3 Speed = new Vector3(5f, 5f, 5f);
+	public Vector3 Offset;
+	public float SlowDistance = 3f;
+	public float StopDistance = 1f;
+	public EntityMessage OnSlowing;
+	public EntityMessage OnStopped;
 	public TargetBase Target;
 	public TimeComponent Time;
 	public Transform Transform;
+
+	bool isSlowing;
+	bool isStopped;
 
 	void FixedUpdate()
 	{
@@ -21,15 +28,29 @@ public class SeekMotion : ComponentBehaviour
 			return;
 
 		var position = Transform.position;
-		var target = Target.Target;
+		var target = Target.Target + Offset;
+		var direction = Vector3.zero.SetValues(target - position, Axes);
+		float distance = direction.magnitude;
+		float modifier = Mathf.Clamp01((distance - StopDistance) / (SlowDistance - StopDistance));
+		var speed = Speed * modifier * Time.FixedDeltaTime;
 
-		if ((Axes & Axes.X) != 0)
-			position.x = Mathf.Lerp(position.x, target.x + Offset.x, Speed.x * Time.FixedDeltaTime);
-		if ((Axes & Axes.Y) != 0)
-			position.y = Mathf.Lerp(position.y, target.y + Offset.y, Speed.y * Time.FixedDeltaTime);
-		if ((Axes & Axes.Z) != 0)
-			position.z = Mathf.Lerp(position.z, target.z + Offset.z, Speed.z * Time.FixedDeltaTime);
+		Transform.Translate(direction.normalized.Mult(speed), Axes);
 
-		Transform.position = position;
+		// Messages
+		if (!isSlowing && modifier < 1f)
+		{
+			isSlowing = true;
+			Entity.SendMessage(OnSlowing);
+		}
+		else if (modifier >= 1f)
+			isStopped = false;
+
+		if (!isStopped && modifier <= 0f)
+		{
+			isStopped = true;
+			Entity.SendMessage(OnStopped);
+		}
+		else if (modifier > 0f)
+			isStopped = false;
 	}
 }

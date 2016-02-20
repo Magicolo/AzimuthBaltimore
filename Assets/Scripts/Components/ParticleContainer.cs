@@ -53,6 +53,9 @@ public class ParticleContainer : ComponentBehaviour
 
 	public IEntity Pop()
 	{
+		if (particles.Count == 0)
+			return null;
+
 		var entity = particles.PopLast();
 
 		if (entity != null)
