@@ -21,13 +21,13 @@ public class BodyMotion : ComponentBehaviour
 
 	void FixedUpdate()
 	{
-		Vector3 motion = gatherMotion().SetValues(0,Axes.Y) * Time.FixedDeltaTime;
+		Vector3 motion = gatherMotion().SetValues(0,Axes.Y);
 		if (lookAtDirection)
 			Rigidbody.transform.LookAt(Rigidbody.transform.position + motion,Vector3.up);
 
-		//if (Agent)
-			//Agent.Move(motion);
-		Rigidbody.Translate(motion, Axes);
+		if (Agent)
+			Agent.Move(motion * Time.FixedDeltaTime);
+		Rigidbody.Translate(motion * Time.FixedDeltaTime, Axes);
 	}
 
 	private Vector3 gatherMotion()

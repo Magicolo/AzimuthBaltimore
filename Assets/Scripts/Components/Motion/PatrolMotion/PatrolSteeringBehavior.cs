@@ -12,7 +12,7 @@ public class PatrolSteeringBehavior : SteeringBehaviorBase
 	[Min]
 	public float ChangeTargetCloseness = 0.1f;
 
-	void Start()
+	protected override void Start()
 	{
 		base.Start();
 		Agent.SetDestination(TargetWayPoint.transform.position);
@@ -25,7 +25,7 @@ public class PatrolSteeringBehavior : SteeringBehaviorBase
 		Vector3 targetP = TargetWayPoint.transform.position.SetValues(0, Axes.Y);
 		Vector3 currentP = rigidbody.position.SetValues(0, Axes.Y);
 		
-		Debug.DrawLine(transform.position, targetP + (targetP - currentP).normalized, Color.red);
+		//Debug.DrawLine(transform.position, targetP + (targetP - currentP).normalized, Color.red);
 
 		if (Vector3.Distance(targetP, currentP) < ChangeTargetCloseness)
 		{
@@ -34,9 +34,8 @@ public class PatrolSteeringBehavior : SteeringBehaviorBase
 		Agent.SetDestination(targetP);
 		targetP = Agent.steeringTarget.SetValues(0, Axes.Y);
 		
-		Debug.DrawLine(transform.position, targetP + (targetP - currentP).normalized, Color.green);
+		//Debug.DrawLine(transform.position, targetP + (targetP - currentP).normalized, Color.green);
 
-		//PDebug.Log(targetP , (targetP - currentP).normalized);
 		return (targetP - currentP).normalized;
 	}
 }
