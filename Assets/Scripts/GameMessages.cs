@@ -13,6 +13,7 @@ public enum GameMessages
 	Kill,
 	Shoot,
 	Explode,
+	Collide,
 
 	// Reactions
 	OnDamaged = 1000,
@@ -20,4 +21,5 @@ public enum GameMessages
 	OnShot,
 	OnTargetSeen,
 	OnExploded,
+	OnCollision,
 }

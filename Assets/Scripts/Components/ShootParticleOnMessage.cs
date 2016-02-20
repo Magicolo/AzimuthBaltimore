@@ -19,9 +19,12 @@ public class ShootParticleOnMessage : ComponentBehaviour, IMessageable
 
 		if (particle != null && particle.HasTransform())
 		{
-			var target = mainCamera.GetMouseWorldPosition(CachedTransform.position.z);
-			var direction = (target - CachedTransform.position).normalized;
-			particle.GetTransform().rotation = Quaternion.LookRotation(direction);
+			var transform = particle.GetTransform();
+			var direction = (Input.mousePosition - mainCamera.WorldToScreenPoint(transform.position)).normalized;
+			direction.z = direction.y;
+			direction.y = 0f;
+
+			transform.rotation = Quaternion.LookRotation(direction);
 			particle.SendMessage(Message.Value);
 		}
 	}
