@@ -5,12 +5,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Pseudo;
 
-public class IntervalSpawner : ComponentBehaviour
+public class ParticleSpawner : ComponentBehaviour
 {
 	public float Interval = 1f;
-	public int MaxSpawn;
-	public Transform Parent;
-	public EntityBehaviour Spawn;
+	public EntityBehaviour Prefab;
+	public ParticleContainer Container;
 	public TimeComponent Time;
 
 	float counter;
@@ -19,15 +18,14 @@ public class IntervalSpawner : ComponentBehaviour
 
 	void Update()
 	{
+		if (Container.Count >= Container.Capacity)
+			return;
+
 		counter += Time.DeltaTime;
 
 		if (counter >= Interval)
 		{
-			var entity = entityManager.CreateEntity(Spawn);
-			var transform = entity.GetTransform();
-			transform.parent = Parent;
-			transform.localPosition = Vector3.zero;
-
+			Container.Add(entityManager.CreateEntity(Prefab));
 			counter -= Interval;
 		}
 	}
