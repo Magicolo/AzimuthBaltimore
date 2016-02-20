@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Pseudo;
 
-public abstract class SteeringBehaviorBase : ComponentBehaviour
+public abstract class MotionSpeedModifier : ComponentBehaviour
 {
-	public abstract Vector3 GetMotionAddition(Rigidbody rigidbody);
+	public abstract float ModifieSpeed(float speed);
 }

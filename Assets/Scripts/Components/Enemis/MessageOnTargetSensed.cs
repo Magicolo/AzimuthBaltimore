@@ -17,7 +17,7 @@ public class MessageOnTargetSensed : ComponentBehaviour
 		{
 			if (Vector3.Distance(target.GetTransform().position, this.transform.position) <= Proximity)
 			{
-				Entity.SendMessage(Message);
+				Entity.SendMessage(Message,target);
 			}
 		}
 	}

@@ -11,7 +11,7 @@ public class PatrolSteeringBehavior : SteeringBehaviorBase
 	[Min]
 	public float ChangeTargetCloseness = 0.1f;
 
-	public override Vector3 GetMotionAddition(TimeComponent time, Rigidbody rigidbody)
+	public override Vector3 GetMotionAddition(Rigidbody rigidbody)
 	{
 		Vector3 targetP = TargetWayPoint.transform.position;
 		Vector3 currentP = rigidbody.position;

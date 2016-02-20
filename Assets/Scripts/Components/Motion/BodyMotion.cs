@@ -9,9 +9,10 @@ public class BodyMotion : ComponentBehaviour
 {
 	public TimeComponent Time;
 	public Rigidbody Rigidbody;
+	[Mask(Axes.XYZ)]
 	public Axes Axes = Axes.XZ;
 
-	public float speed = 5;
+	public float Speed = 5;
 
 	void FixedUpdate()
 	{
@@ -22,21 +23,32 @@ public class BodyMotion : ComponentBehaviour
 	private Vector3 gatherMotion()
 	{
 		Vector3 motion = gatherSterringBehavior();
-		
-		return motion * speed;
+		float speedModifier = gatherSpeedModifiers();
+		return motion * speedModifier;
+	}
+
+	private float gatherSpeedModifiers()
+	{
+		float speed = Speed;
+		var modifs = GetComponentsInChildren<MotionSpeedModifier>(false);
+		foreach (var speedModif in modifs)
+		{
+			speed = speedModif.ModifieSpeed(speed);
+		}
+		return speed;
 	}
 
 	private Vector3 gatherSterringBehavior()
 	{
 		Vector3 motion = Vector3.zero;
 
-		var steerings = GetComponents<SteeringBehaviorBase>();
+		var steerings = GetComponentsInChildren<SteeringBehaviorBase>(false);
 		for (int i = 0; i < steerings.Length; i++)
 		{
 			var steering = steerings[i];
-			motion += steering.GetMotionAddition(Time, Rigidbody);
+			motion += steering.GetMotionAddition(Rigidbody);
 		}
 		
-		return motion;
+		return motion.normalized;
 	}
 }
