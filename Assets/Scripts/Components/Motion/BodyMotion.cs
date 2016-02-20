@@ -7,17 +7,27 @@ using Pseudo;
 
 public class BodyMotion : ComponentBehaviour
 {
+	public NavMeshAgent Agent;
 	public TimeComponent Time;
 	public Rigidbody Rigidbody;
 	[Mask(Axes.XYZ)]
 	public Axes Axes = Axes.XZ;
 
+	public bool lookAtDirection;
+
 	public float Speed = 5;
+
+
 
 	void FixedUpdate()
 	{
-		Vector3 motion = gatherMotion();
-		Rigidbody.Translate(motion * Time.FixedDeltaTime, Axes);
+		Vector3 motion = gatherMotion().SetValues(0,Axes.Y) * Time.FixedDeltaTime;
+		if (lookAtDirection)
+			Rigidbody.transform.LookAt(Rigidbody.transform.position + motion,Vector3.up);
+
+		//if (Agent)
+			//Agent.Move(motion);
+		Rigidbody.Translate(motion, Axes);
 	}
 
 	private Vector3 gatherMotion()
