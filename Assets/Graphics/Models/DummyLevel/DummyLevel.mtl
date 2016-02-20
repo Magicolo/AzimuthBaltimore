@@ -1,8 +1,8 @@
-# MagicaVoxel @ ephtracy
-
-newmtl palette
-illum 1
-Ka 0.000 0.000 0.000
-Kd 1.000 1.000 1.000
-Ks 0.000 0.000 0.000
-map_Kd DummyLevel.png
+newmtl blinn1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd EnvTexture1.tga
+Ni 1.00
+Ks 0.09 0.09 0.09
