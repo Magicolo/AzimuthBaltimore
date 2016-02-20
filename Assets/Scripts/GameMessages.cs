@@ -12,9 +12,16 @@ public enum GameMessages
 	Damage = -1000,
 	Kill,
 	Shoot,
+	TargetSeen,
 
 	// Reactions
 	OnDamaged = 1000,
 	OnKilled,
 	OnShot
+	
+
+	// Reactions
+	OnDamaged = 1000,
+	OnKilled
+
 }
