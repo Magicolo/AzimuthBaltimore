@@ -21,8 +21,9 @@ public class InputMotion : ComponentBehaviour
 
 	void Update()
 	{
-		motion.x = inputManager.GetAxis(Player, Horizontal) * Speed;
-		motion.z = inputManager.GetAxis(Player, Vertical) * Speed;
+		motion.x = inputManager.GetAxis(Player, Horizontal);
+		motion.z = inputManager.GetAxis(Player, Vertical);
+		motion = motion.normalized * Speed;
 	}
 
 	void FixedUpdate()
