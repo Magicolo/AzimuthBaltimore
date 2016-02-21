@@ -24,9 +24,7 @@ public class BodyMotion : ComponentBehaviour
 		if (lookAtDirection)
 			Rigidbody.transform.LookAt(Rigidbody.transform.position + motion.SetValues(0, Axes.Y), Vector3.up);
 
-		PDebug.Log(motion);
 		Rigidbody.Translate(motion * Time.FixedDeltaTime, Axes);
-
 	}
 
 	private Vector3 gatherMotion()
@@ -42,7 +40,8 @@ public class BodyMotion : ComponentBehaviour
 		var modifs = GetComponentsInChildren<MotionSpeedModifier>(false);
 		foreach (var speedModif in modifs)
 		{
-			speed = speedModif.ModifieSpeed(speed);
+			if(speedModif.Active)
+				speed = speedModif.ModifieSpeed(speed);
 		}
 		return speed;
 	}
@@ -55,6 +54,8 @@ public class BodyMotion : ComponentBehaviour
 		for (int i = 0; i < steerings.Length; i++)
 		{
 			var steering = steerings[i];
+			if (!steering.Active)
+				continue;
 			motion += steering.GetMotionAddition(Rigidbody);
 		}
 		

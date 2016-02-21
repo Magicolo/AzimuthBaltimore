@@ -17,7 +17,7 @@ public class StopWhenClearShotToTarget : MotionSpeedModifier
 		if (distance.IsBetween(DistanceRange))
 		{
 			//Debug.Log("FIRE !!");	
-		return 0;
+		return 0.001f;
 
 		}
 			
