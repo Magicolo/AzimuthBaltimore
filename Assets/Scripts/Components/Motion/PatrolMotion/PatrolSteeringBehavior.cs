@@ -15,13 +15,16 @@ public class PatrolSteeringBehavior : SteeringBehaviorBase
 	protected override void Start()
 	{
 		base.Start();
-		Agent.SetDestination(TargetWayPoint.transform.position);
+		if (TargetWayPoint != null)
+			Agent.SetDestination(TargetWayPoint.transform.position);
 		//Agent.updatePosition = false;
 		//Agent.updateRotation = false;
 	}
 
 	public override Vector3 GetMotionAddition(Rigidbody rigidbody)
 	{
+		if (TargetWayPoint == null) return Vector3.zero;
+
 		Vector3 targetP = TargetWayPoint.transform.position.SetValues(0, Axes.Y);
 		Vector3 currentP = rigidbody.position.SetValues(0, Axes.Y);
 		

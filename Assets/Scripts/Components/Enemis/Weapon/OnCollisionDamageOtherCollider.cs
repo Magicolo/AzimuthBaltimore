@@ -20,7 +20,9 @@ public class OnCollisionDamageOtherCollider : ComponentBehaviour
 	void OnTriggerEnter(Collider other)
 	{
 		if(other.GetEntity() != null)
+		{
 			other.GetEntity().SendMessage(GameMessages.OnDamaged, DamageData);
+		}
 		
 		if (DisableWeaponRoot)
 			WeaponRoot.gameObject.SetActive(false);

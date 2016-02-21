@@ -11,11 +11,28 @@ public class AttackOnMessage : ComponentBehaviour,IMessageable
 
 	public MessageEnum OnMessage;
 
+	float t;
+	public float Cooldown;
+
+	bool ReadyToAttack;
+
 	void IMessageable.OnMessage<TId>(TId message)
 	{
 		if (OnMessage.Equals(message))
 		{
-			Weapon.gameObject.SetActive(true);
+			ReadyToAttack = true;
 		}
+	}
+
+	void Update()
+	{
+		if (t <= 0 && ReadyToAttack)
+		{
+			Weapon.gameObject.SetActive(true);
+			t = Cooldown;
+			ReadyToAttack = false;
+		}
+		else
+			t -= Time.deltaTime;
 	}
 }
