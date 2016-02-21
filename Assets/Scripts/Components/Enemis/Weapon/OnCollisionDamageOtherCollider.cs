@@ -9,12 +9,20 @@ public class OnCollisionDamageOtherCollider : ComponentBehaviour
 {
 
 	public EntityBehaviour WeaponRoot;
+	public bool DisableWeaponRoot;
+	public bool RecycleWeaponRoot;
+
 	public EntityGroups Attackable;
 	public DamageData DamageData;
 
+
+
 	void OnTriggerEnter(Collider other)
 	{
-
 		other.GetEntity().SendMessage(GameMessages.OnDamaged, DamageData);
+		if (DisableWeaponRoot)
+			WeaponRoot.gameObject.SetActive(false);
+		if (RecycleWeaponRoot)
+			WeaponRoot.Entity.Manager.RecycleEntity(WeaponRoot);
 	}
 }

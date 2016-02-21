@@ -7,7 +7,6 @@ using Pseudo;
 
 public class BodyMotion : ComponentBehaviour
 {
-	public NavMeshAgent Agent;
 	public TimeComponent Time;
 	public Rigidbody Rigidbody;
 	[Mask(Axes.XYZ)]
@@ -27,9 +26,6 @@ public class BodyMotion : ComponentBehaviour
 		
 		Rigidbody.Translate(motion * Time.FixedDeltaTime, Axes);
 
-		//if (Agent)
-			//Agent.Warp(transform.position);
-			//Agent.Move(motion * Time.FixedDeltaTime);
 	}
 
 	private Vector3 gatherMotion()
