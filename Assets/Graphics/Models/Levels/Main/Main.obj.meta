@@ -1,17 +1,18 @@
 fileFormatVersion: 2
-guid: dab1d542b4431490291d6d6bfb1750ed
-timeCreated: 1456001040
+guid: 7d9281ebe10703d4e8699c806d40ee70
+timeCreated: 1456032384
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: pCube1
-    400000: //RootNode
-    400002: pCube1
-    2300000: pCube1
-    3300000: pCube1
-    4300000: pCube1
+    100000: default
+    100002: //RootNode
+    400000: default
+    400002: //RootNode
+    2300000: default
+    3300000: default
+    4300000: default
+    6400000: default
   materials:
     importMaterials: 1
     materialName: 0
@@ -37,8 +38,8 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
-    addColliders: 0
+    meshCompression: 3
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -53,7 +54,7 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
