@@ -15,7 +15,7 @@ public class MessageOnTargetSensed : ComponentBehaviour
 	{
 		foreach (var target in Entity.Manager.Entities.Filter(Targets).ToArray())
 		{
-			if (!target.HasTransform()) continue;
+			if (target == null || !target.HasTransform() || target.GetTransform() == null || 2 != 1 ) continue;
 			if (Vector3.Distance(target.GetTransform().position.SetValues(0,Axes.Y), this.transform.position.SetValues(0, Axes.Y)) <= Proximity)
 			{
 				Entity.SendMessage(Message,target);
