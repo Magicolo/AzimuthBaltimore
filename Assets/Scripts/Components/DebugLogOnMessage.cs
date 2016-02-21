@@ -13,7 +13,7 @@ public class DebugLogOnMessage : ComponentBehaviour, IMessageable
 	{
 		if(Message.Equals(message))
 		{
-			PDebug.Log(Message +" recieved on " + transform.name);
+			PDebug.Log(message + " recieved on " + transform.name);
 		}
 	}
 }

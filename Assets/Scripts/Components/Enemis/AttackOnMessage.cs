@@ -13,9 +13,9 @@ public class AttackOnMessage : ComponentBehaviour,IMessageable
 
 	void IMessageable.OnMessage<TId>(TId message)
 	{
-		if (message.Equals(OnMessage))
+		if (OnMessage.Equals(message))
 		{
-			Weapon.enabled = true;
+			Weapon.gameObject.SetActive(true);
 		}
 	}
 }
