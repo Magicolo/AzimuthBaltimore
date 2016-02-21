@@ -24,8 +24,8 @@ public class OnColissionShoot : ComponentBehaviour
 		t = CoolDown;
 		IEntity entity = Entity.Manager.CreateEntity(ProjectilePrefab);
 		entity.GetTransform().position = WeaponRoot.position;
-		var target = entity.GetComponent<Vector3Target>();
-
+		var steering = entity.GetComponent<DirectionSteering>();
+		steering.Direction = transform.forward;
 	}
 
 	void Update()
