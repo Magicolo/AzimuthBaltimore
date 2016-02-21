@@ -9,10 +9,19 @@ public class StopWhenClearShotToTarget : MotionSpeedModifier
 {
 	public TargetBase Target;
 	public MinMax DistanceRange;
+	public Transform TransformRoot;
 
 	public override float ModifieSpeed(float speed)
 	{
-		
-		return speed;
+		float distance = Vector3.Distance(Target.Target, TransformRoot.position);
+		if (distance.IsBetween(DistanceRange))
+		{
+			//Debug.Log("FIRE !!");	
+		return 0;
+
+		}
+			
+		else
+			return speed;
 	}
 }

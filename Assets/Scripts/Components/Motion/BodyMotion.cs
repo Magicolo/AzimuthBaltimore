@@ -23,7 +23,8 @@ public class BodyMotion : ComponentBehaviour
 		Vector3 motion = gatherMotion();
 		if (lookAtDirection)
 			Rigidbody.transform.LookAt(Rigidbody.transform.position + motion.SetValues(0, Axes.Y), Vector3.up);
-		
+
+		PDebug.Log(motion);
 		Rigidbody.Translate(motion * Time.FixedDeltaTime, Axes);
 
 	}
