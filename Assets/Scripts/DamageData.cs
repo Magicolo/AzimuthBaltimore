@@ -22,7 +22,9 @@ public enum DamageTypes
 [Serializable]
 public struct DamageData
 {
+	[EnumFlags]
 	public DamageSources Sources;
+	[EnumFlags]
 	public DamageTypes Types;
 	public float Damage;
 }
