@@ -24,10 +24,12 @@ public class BodyMotion : ComponentBehaviour
 		Vector3 motion = gatherMotion().SetValues(0,Axes.Y);
 		if (lookAtDirection)
 			Rigidbody.transform.LookAt(Rigidbody.transform.position + motion,Vector3.up);
-
-		if (Agent)
-			Agent.Move(motion * Time.FixedDeltaTime);
+		
 		Rigidbody.Translate(motion * Time.FixedDeltaTime, Axes);
+
+		//if (Agent)
+			//Agent.Warp(transform.position);
+			//Agent.Move(motion * Time.FixedDeltaTime);
 	}
 
 	private Vector3 gatherMotion()

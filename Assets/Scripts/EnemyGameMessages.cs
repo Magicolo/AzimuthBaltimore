@@ -8,5 +8,5 @@ using Pseudo;
 [MessageEnum]
 public enum EnemyGameMessages
 {
-	OnTargetLost,
+	OnTargetLost, OnTargetClose
 }

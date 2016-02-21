@@ -16,8 +16,8 @@ public class PatrolSteeringBehavior : SteeringBehaviorBase
 	{
 		base.Start();
 		Agent.SetDestination(TargetWayPoint.transform.position);
-		Agent.updatePosition = false;
-		Agent.updateRotation = false;
+		//Agent.updatePosition = false;
+		//Agent.updateRotation = false;
 	}
 
 	public override Vector3 GetMotionAddition(Rigidbody rigidbody)
@@ -25,7 +25,7 @@ public class PatrolSteeringBehavior : SteeringBehaviorBase
 		Vector3 targetP = TargetWayPoint.transform.position.SetValues(0, Axes.Y);
 		Vector3 currentP = rigidbody.position.SetValues(0, Axes.Y);
 		
-		//Debug.DrawLine(transform.position, targetP + (targetP - currentP).normalized, Color.red);
+		Debug.DrawLine(transform.position, targetP, Color.red);
 
 		if (Vector3.Distance(targetP, currentP) < ChangeTargetCloseness)
 		{
@@ -34,7 +34,7 @@ public class PatrolSteeringBehavior : SteeringBehaviorBase
 		Agent.SetDestination(targetP);
 		targetP = Agent.steeringTarget.SetValues(0, Axes.Y);
 		
-		//Debug.DrawLine(transform.position, targetP + (targetP - currentP).normalized, Color.green);
+		Debug.DrawLine(transform.position, targetP, Color.green);
 
 		return (targetP - currentP).normalized;
 	}
