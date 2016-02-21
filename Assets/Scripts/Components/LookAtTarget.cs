@@ -10,12 +10,16 @@ public class LookAtTarget : ComponentBehaviour
 	public TargetBase LookAt;
 	public Transform Transform;
 	public TimeComponent Time;
+	public Axes Axes;
 
+	
 	void Update()
 	{
 		if(LookAt.HasTarget)
 		{
-			Quaternion targetRotation = Quaternion.LookRotation(LookAt.Target - Transform.position);
+			var direction = LookAt.Target - Transform.position;
+			//if(Axes. & Axes.X > 0)
+			Quaternion targetRotation = Quaternion.LookRotation(direction);
 			Transform.localRotation = Quaternion.Lerp(Transform.localRotation, targetRotation, Time.DeltaTime);
 		}
 	}
